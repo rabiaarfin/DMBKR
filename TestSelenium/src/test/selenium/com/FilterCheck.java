@@ -18,9 +18,7 @@ public class FilterCheck {
 		driver.findElement(By.cssSelector("input#nav-search-submit-button")).click();
 		WebElement sel=driver.findElement(By.id("s-result-sort-select"));
 		Select sel1=new Select(sel);
-		
-		sel1.selectByVisibleText("Price: Low to High");
-		
+		sel1.selectByVisibleText("Price: Low to High");	
 	}
 	public void selectBlueRay() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -40,28 +38,30 @@ public class FilterCheck {
 		
 	}
 	
-	public void selectPrice(String pr) {
+public void selectPrice(String pr) {
 		
 		List <WebElement> price=driver.findElements(By.xpath("//a[@class='a-size-base a-link-normal a-text-normal']"));
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		for(WebElement i:price) {
-			System.out.println("yes I am here"+i.getText());
-
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 			if(i.getText().contains(pr)){
-				
-				System.out.println("my price");
+			
+				System.out.println("yes I am here"+i.getText());
+				i.click();
+
+				break;
 			}
-		}
-				
-	}
+		}}			
+	
 	public void shut() {
 		driver.close();
 	}
 	public static void main(String[] args) throws InterruptedException {
 		
 		FilterCheck FC=new FilterCheck();
+		//PriceCheck pc=new PriceCheck();
 		FC.callDriver();
 		FC.selectBlueRay();
+		
 		FC.selectPrice("15");
 	//FC.shut();
 		
